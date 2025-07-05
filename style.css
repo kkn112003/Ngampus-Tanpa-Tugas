@@ -1,0 +1,358 @@
+/* File: style.css */
+/* GANTI SELURUH BLOK @media LAMA ANDA DENGAN YANG INI */
+
+/* === Gaya untuk Hamburger & Navigasi Mobile (Default Tersembunyi) === */
+.hamburger-menu {
+    display: none; /* Sembunyikan di desktop */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1001; /* Pastikan di atas elemen lain */
+}
+
+.hamburger-menu span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-primary);
+    margin: 5px 0;
+    transition: all 0.3s ease-in-out;
+}
+
+
+/* === Responsive Design === */
+@media (max-width: 768px) {
+    /* Penyesuaian umum */
+    h1 { font-size: 2.2rem; }
+    h2 { font-size: 2rem; }
+    
+    .container {
+        padding: 0 1.5rem; /* Kurangi padding samping agar tidak mepet */
+    }
+
+    /* Tampilkan tombol hamburger di mobile */
+    .hamburger-menu {
+        display: block;
+    }
+
+    /* Atur kontainer header agar logo dan hamburger sejajar */
+    .main-header .container {
+        display: flex;
+        flex-direction: row; /* Kembali ke baris */
+        justify-content: space-between; /* Logo di kiri, hamburger di kanan */
+        align-items: center;
+    }
+    
+    /* === ATURAN UNTUK NAVIGASI MOBILE === */
+    .main-nav {
+        /* Posisikan menu di bawah header, menutupi layar */
+        position: absolute;
+        top: 70px; /* Sesuaikan dengan tinggi header Anda */
+        left: 0;
+        width: 100%;
+        background-color: var(--bg-secondary);
+        
+        /* Sembunyikan menu dengan transisi dropdown */
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease-in-out;
+    }
+
+    /* Kelas 'nav-active' yang akan ditambahkan oleh JavaScript */
+    .main-nav.nav-active {
+        max-height: 500px; /* Atur tinggi maksimal agar semua menu terlihat */
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    .main-nav ul {
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 0; /* Beri padding saat menu terbuka */
+    }
+
+    .main-nav ul li {
+        margin: 0;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .main-nav ul li a {
+        display: block;
+        padding: 1rem; /* Buat area klik lebih besar */
+        width: 100%;
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    .main-nav ul li:last-child a {
+        border-bottom: none;
+    }
+
+    .main-nav ul li a.btn {
+        margin: 1rem auto;
+        width: fit-content; /* Buat tombol tidak full-width */
+    }
+
+    /* Animasi hamburger menjadi 'X' (close) saat aktif */
+    .hamburger-menu.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger-menu.active span:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburger-menu.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+    }
+    
+    /* Penyesuaian layout lain untuk mobile */
+    #hero {
+        padding-top: 10rem;
+        padding-bottom: 6rem;
+    }
+    #cara-kerja .process-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* === CSS Variables (Tema Warna) === */
+:root {
+    --bg-primary: #121212;
+    --bg-secondary: #1E1E1E;
+    --color-primary: #BB86FC;
+    --color-secondary: #03DAC6;
+    --text-primary: #E0E0E0;
+    --text-secondary: #B3B3B3;
+    --border-color: #333333;
+}
+
+/* === Reset & Global Styles === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+/* === Utilitas & Layout === */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+section {
+    padding: 6rem 0;
+}
+
+h1, h2, h3 {
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+h1 { font-size: 3rem; color: #ffffff; }
+h2 { font-size: 2.5rem; text-align: center; color: var(--color-primary); margin-bottom: 3rem;}
+h3 { font-size: 1.5rem; color: var(--color-secondary); }
+
+p {
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-primary);
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--color-secondary);
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+    color: #000;
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(187, 134, 252, 0.2);
+}
+
+/* === Header & Navigasi === */
+.main-header {
+    background-color: rgba(30, 30, 30, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.main-nav ul li {
+    margin-left: 2rem;
+}
+
+.main-nav ul li a {
+    font-weight: 400;
+    font-size: 1rem;
+}
+
+/* === Hero Section === */
+#hero {
+    padding-top: 12rem; /* Extra padding for fixed header */
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(rgba(18, 18, 18, 0.8), rgba(18, 18, 18, 1)), url('https://source.unsplash.com/random/1600x900/?dark,code,study') no-repeat center center/cover;
+}
+
+#hero .container {
+    max-width: 800px;
+}
+
+#hero p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+    color: var(--text-primary);
+}
+
+#hero h1 span {
+    color: var(--color-primary);
+}
+
+/* === Cara Kerja Section === */
+#cara-kerja .process-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    text-align: center;
+}
+
+.process-step {
+    background-color: var(--bg-secondary);
+    padding: 2rem;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.process-step:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+}
+
+.process-step .icon {
+    font-size: 3rem;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+}
+
+/* === Layanan Section === */
+#layanan .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.service-card {
+    background-color: var(--bg-secondary);
+    border-radius: 10px;
+    padding: 2rem;
+    border-left: 5px solid var(--color-secondary);
+}
+
+/* === CTA (Call to Action) Section === */
+#order {
+    background-color: var(--bg-secondary);
+    text-align: center;
+    border-radius: 15px;
+    padding: 4rem 2rem;
+}
+
+#order h2 {
+    margin-bottom: 1rem;
+}
+
+#order p {
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+}
+
+/* === Footer === */
+.main-footer {
+    padding: 2rem 0;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    margin-top: 4rem;
+}
+
+.main-footer p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* === Responsive Design === */
+@media (max-width: 768px) {
+    h1 { font-size: 2.2rem; }
+    h2 { font-size: 2rem; }
+    
+    .main-header .container {
+        flex-direction: column;
+    }
+    .main-nav ul {
+        margin-top: 1rem;
+        padding: 0;
+    }
+    .main-nav ul li {
+        margin: 0 0.8rem;
+    }
+    
+    #hero {
+        height: auto;
+        padding-top: 15rem;
+        padding-bottom: 6rem;
+    }
+
+    #cara-kerja .process-grid {
+        grid-template-columns: 1fr;
+    }
+}
